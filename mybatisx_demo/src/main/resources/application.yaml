@@ -1,0 +1,11 @@
+spring:
+  # 配置数据源信息
+  datasource:
+    # 配置数据源类型
+    type: com.zaxxer.hikari.HikariDataSource
+    # 配置连接数据库的各个信息
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接数据库时，的编码格式
+    url: jdbc:mysql://123.57.92.107:3306/mybatis_plus?characterEncoding=utf-8&userSSL=false
+    username: root
+    password: N331150871

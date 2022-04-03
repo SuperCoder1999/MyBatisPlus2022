@@ -1,0 +1,21 @@
+spring:
+  # 配置数据源信息
+  datasource:
+    dynamic:
+      # 设置默认的数据源或者数据源组,默认值即为master
+      primary: master
+      # 严格匹配数据源,默认false.true未匹配到指定数据源时抛异常,false使用默认数据源
+      strict: false
+      # 数据源各个信息
+      datasource:
+        # 第一个数据源(主数据源)
+        master: #名字是什么,在上面primary就要设置为什么.默认是master,所以不动也行
+          url: jdbc:mysql://123.57.92.107:3306/mybatis_plus?characterEncoding=utf-8&useSSL=false
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: N331150871
+        slave_1:
+          url: jdbc:mysql://123.57.92.107:3306/mybatis_plus_1?characterEncoding=utf-8&useSSL=false
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: N331150871

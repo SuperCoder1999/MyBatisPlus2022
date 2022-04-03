@@ -4,14 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atguigu.mybatisplus.mapper.UserMapper">
 
+<!--    这个文件,在代码生成器中有.其作用可以是:定制sql查询-->
+
     <!--Map<String, Object> selectMapById(Long id);-->
     <select id="selectMapById" resultType="map">
-        select id,name,age,email from user where id = #{id}
+        select uid as id,user_name as name,age,email from t_user where uid = #{id}
     </select>
+<!--    在自定义的Mapper.xml中,表名不能用@TableName重定义.执行在sql中将user修改为t_user
+        以及id变成uid,name变成user_name-->
 
     <!--Page<User> selectPageVo(@Param("page") Page<User> page, @Param("age") Integer age);-->
-    <!--<select id="selectPageVo" resultType="User">
-        select uid,user_name,age,email from t_user where age > #{age}
-    </select>-->
+<!--    拼接sql:SELECT COUNT(*) AS total FROM t_user WHERE age > ?-->
+    <select id="selectPageVo" resultType="User">
+        select uid as id,user_name as name,age,email from t_user where age > #{age}
+    </select>
 
 </mapper>

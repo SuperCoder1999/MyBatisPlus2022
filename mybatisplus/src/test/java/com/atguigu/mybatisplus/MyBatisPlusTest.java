@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用于测试 继承BaseMapper后,使用BaseMapper中的方法
+ * 用于测试 继承BaseMapper后,使用BaseMapper中的方法,以及User实体类的一些注解
+ * 1.(BaseMapper中没有批量添加功能,因为会造成sql拼接太长.批量添加在IService中提供)
+ * 2.添加逻辑删除@TableLogic后查询的sql: SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user WHERE is_deleted=0
  */
 @SpringBootTest
 public class MyBatisPlusTest {
@@ -41,14 +43,14 @@ public class MyBatisPlusTest {
     }
 
     /**
-     * 测试添加
+     * 测试添加 / 测试关于@TableId的相关属性
      */
     @Test
     public void testInsert(){
         //实现新增用户信息
         //INSERT INTO user ( id, name, age, email ) VALUES ( ?, ?, ?, ? )
         User user = new User();
-        //user.setId(100L);
+        //user.setId(100L);//如果手动设置id数值,就不会采用雪花算法以及自增策略
         user.setName("张三");
         user.setAge(23);
         user.setEmail("zhangsan@atguigu.com");
@@ -58,7 +60,7 @@ public class MyBatisPlusTest {
     }
 
     /**
-     * 测试删除方法
+     * 测试删除方法 / 测试@TableLogic注解
      */
     @Test
     public void testDelete(){
@@ -134,6 +136,7 @@ public class MyBatisPlusTest {
          */
         Map<String, Object> map = userMapper.selectMapById(1L);
         System.out.println(map);
+
     }
 
 }

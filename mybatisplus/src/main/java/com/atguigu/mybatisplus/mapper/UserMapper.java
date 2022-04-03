@@ -20,15 +20,18 @@ public interface UserMapper extends BaseMapper<User> {
      * 根据id查询用户信息为map集合
      * 放弃 BaseMapper中提供的方法.使用配置文件Mapper.xml和Mapper接口,实现查询
      */
-    //@MapKey("id") 这里的方法报错.暂时不知道为什么需要 MapKey???
+    /*将表中的数据以map集合的方式查询，一条数据对应一个map；若有多条数据，就会产生多个map集合，并
+    且最终要以一个map的方式返回数据，此时需要通过@MapKey注解设置map集合的键，值是每条数据所对应的
+    map集合*/
+    @MapKey("id")
     Map<String, Object> selectMapById(Long id);
 
     /**
-     * 通过年龄查询用户信息并分页
-     * @param page MyBatis-Plus所提供的分页对象，必须位于第一个参数的位置
-     * @param age
-     * @return
+     * 自定义分页功能 : 通过年龄查询用户信息并分页
+     * @param page MyBatis-Plus所提供的分页对象，必须位于第一个参数的位置(用于将查询数据封装到Page对象中)
+     *             (为什么借Page就可以完成分页,这个不清楚???)
      */
-    //Page<User> selectPageVo(@Param("page") Page<User> page, @Param("age") Integer age);
+    //@Param规定传参的名称
+    Page<User> selectPageVo(@Param("page") Page<User> page, @Param("age") Integer age);
 
 }
